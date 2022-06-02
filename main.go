@@ -9,7 +9,7 @@ import (
 var id *int
 
 func main() {
-	id = flag.Int("t", -1, "Id vom Rechner")
+	id = flag.Int("d", -1, "Id vom Rechner")
 	flag.Parse()
 
 	if *id == -1 {
