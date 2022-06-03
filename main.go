@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
-	"runtime"
+	"os/exec"
 
 	"github.com/joho/godotenv"
 	"github.com/mertdogan12/cn/internal/conf"
@@ -34,9 +34,12 @@ func main() {
 		panic(err)
 	}
 
-	if runtime.GOOS != "windows" {
-		log.Fatalln("Funktioniert nur auf windows")
+	out, err := exec.Command("powershell.exe", "Rename-Computer", "-NewName", fmt.Sprintf("\"%s\"", name)).CombinedOutput()
+	if err != nil {
+		fmt.Println(string(out))
+		panic(err)
 	}
 
-	fmt.Println(name)
+	fmt.Println(string(out))
+	fmt.Println("Computername wurde erfolgreich zu", name, "geändert")
 }
