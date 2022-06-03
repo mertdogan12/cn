@@ -13,12 +13,12 @@ type Mongo struct {
 }
 
 var (
-	ID       *string
 	Database Mongo
+	Port     *string
 )
 
 func Init() {
-	ID = flag.String("s", "", "Computer id")
+	Port = flag.String("p", "3000", "Port")
 	flag.Parse()
 
 	Database = Mongo{
