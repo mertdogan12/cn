@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"runtime"
 
 	"github.com/joho/godotenv"
 	"github.com/mertdogan12/cn/internal/conf"
@@ -31,6 +32,10 @@ func main() {
 	}
 	if err != nil {
 		panic(err)
+	}
+
+	if runtime.GOOS != "windows" {
+		log.Fatalln("Funktioniert nur auf windows")
 	}
 
 	fmt.Println(name)
