@@ -2,7 +2,6 @@ package database
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 
 	"github.com/mertdogan12/cn/internal/conf"
@@ -50,10 +49,7 @@ func GetName(id string) (string, error) {
 		return "", err
 	}
 
-	jsonData, err := json.MarshalIndent(result, "", "\t")
-	if err != nil {
-		return "", err
-	}
+	data := result["name"]
 
-	return string(jsonData), nil
+	return data.(string), nil
 }
