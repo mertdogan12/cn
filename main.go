@@ -1,27 +1,27 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"log"
-)
 
-var id *string
+	"github.com/joho/godotenv"
+	"github.com/mertdogan12/cn/internal/conf"
 	"github.com/mertdogan12/cn/internal/database"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
 func main() {
-	id = flag.String("-s", "", "Computer id")
-	flag.Parse()
+	godotenv.Load()
+	conf.Init()
 
-	if len(*id) == 0 {
 	client, err := database.Connect()
 	if err != nil {
 		panic(err)
 	}
 
 	defer database.Disconnect(client)
+
+	if len(*conf.ID) == 0 {
 		log.Fatalln("Id ist nicht gegeben")
 	}
 
