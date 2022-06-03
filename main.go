@@ -6,13 +6,13 @@ import (
 	"log"
 )
 
-var id *int
+var id *string
 
 func main() {
-	id = flag.Int("d", -1, "Id vom Rechner")
+	id = flag.String("-s", "", "Computer id")
 	flag.Parse()
 
-	if *id == -1 {
+	if len(*id) == 0 {
 		log.Fatalln("Id ist nicht gegeben")
 	}
 
