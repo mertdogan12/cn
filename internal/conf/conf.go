@@ -24,7 +24,7 @@ func Init() {
 	Database = Mongo{
 		Username: os.Getenv("MONGO_USERNAME"),
 		Password: os.Getenv("MONGO_PASSWORD"),
-		Host:     os.Getenv("MOGNO_HOST"),
+		Host:     os.Getenv("MONGO_HOST"),
 		Database: os.Getenv("MONGO_DATABASE"),
 	}
 }
