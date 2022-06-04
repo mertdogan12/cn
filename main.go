@@ -23,5 +23,7 @@ func main() {
 	fmt.Println("Server started at", *conf.Port)
 
 	http.HandleFunc("/getname", api.GetName)
-	http.ListenAndServe(":"+*conf.Port, nil)
+	if err = http.ListenAndServe(":"+*conf.Port, nil); err != nil {
+		panic(err)
+	}
 }
