@@ -5,6 +5,8 @@ services:
   mongo:
     image: mongo:latest
     restart: always
+    ports: 
+      - 27017:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
@@ -20,8 +22,8 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: ${MONGO_PASSWORD}
       ME_CONFIG_MONGODB_URL: mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:27017/
 
-  mongo-express:
-    image: mongo-express:latest
+  cn:
+    image: ghcr.io/mertdogan12/cn:latest
     restart: always
     env_file: .env
     ports:

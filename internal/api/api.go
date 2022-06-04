@@ -28,7 +28,7 @@ func GetName(w http.ResponseWriter, r *http.Request) {
 
 	name, err := database.GetName(id[0])
 	if err == mongo.ErrNoDocuments {
-		ApiRespond(http.StatusNoContent, "Konnte keinen Name unter der Id"+id[0]+"finden", w)
+		ApiRespond(http.StatusNoContent, "Konnte keinen Name unter der Id "+id[0]+" finden", w)
 		return
 	}
 	if err != nil {
