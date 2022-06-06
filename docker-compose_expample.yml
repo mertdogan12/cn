@@ -5,8 +5,8 @@ services:
   mongo:
     image: mongo:latest
     restart: always
-    volumes
-      - ./mongo/data/:/data/db
+    volumes:
+      - ~/.data/mongo/data:/data/db
     ports: 
       - 27017:27017
     environment:
@@ -29,9 +29,11 @@ services:
     restart: always
     env_file: .env
     ports:
-      - 3000:3000
+      - 3001:3000
     environment:
       MONGO_HOST: mongo
+      CN_LOKI_URI: http://loki-rw:3100/
+
 
   # Loki (Credit: https://grafana.com/docs/loki/latest/getting-started/?pg=oss-loki&plcmt=resources)
   loki-rw:
@@ -45,8 +47,6 @@ services:
       - ./loki-config.yaml:/etc/loki/config.yaml
     depends_on:
       - minio
-    networks:
-        - loki
 
   minio:
     image: minio/minio
@@ -63,11 +63,9 @@ services:
       - MINIO_PROMETHEUS_AUTH_TYPE=public
       - MINIO_UPDATE=off
     volumes:
-      - ./.data/minio:/data
+      - ~/.data/minio:/data
     ports:
       - 9000
-    networks:
-      - loki
 
   grafana:
     image: grafana/grafana:latest
@@ -95,5 +93,3 @@ services:
         /run.sh
     ports:
       - "3000:3000"
-    networks:
-      - loki
