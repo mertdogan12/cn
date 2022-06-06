@@ -1,3 +1,6 @@
 cn.exe
 .env
 cn
+
+./mongo
+./.data
