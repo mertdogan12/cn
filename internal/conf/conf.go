@@ -14,12 +14,13 @@ type Mongo struct {
 
 var (
 	Database Mongo
+	LOKI     *bool
+	LOKI_URI string
 	Port     *string
 )
 
 func Init() {
-	Port = flag.String("p", "3000", "Port")
-	flag.Parse()
+	LOKI_URI = os.Getenv("CN_LOKI_URI")
 
 	Database = Mongo{
 		Username: os.Getenv("MONGO_USERNAME"),
@@ -27,4 +28,8 @@ func Init() {
 		Host:     os.Getenv("MONGO_HOST"),
 		Database: os.Getenv("MONGO_DATABASE"),
 	}
+
+	Port = flag.String("p", "3000", "Port")
+	LOKI = flag.Bool("l", true, "Nutze Loki")
+	flag.Parse()
 }

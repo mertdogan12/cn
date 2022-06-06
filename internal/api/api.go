@@ -5,18 +5,19 @@ import (
 	"net/http"
 
 	"github.com/mertdogan12/cn/internal/database"
+	"github.com/mertdogan12/cn/internal/logs"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
 func ApiRespond(status int, message string, w http.ResponseWriter) {
 	w.WriteHeader(status)
 	w.Write([]byte(message))
-	fmt.Println("users/me:", status, "|", message)
+	logs.Log(fmt.Sprintf("users/me: %d | %s", status, message))
 }
 
 func ApiRespondErr(err error, w http.ResponseWriter) {
 	ApiRespond(http.StatusInternalServerError, "Error", w)
-	fmt.Println(err)
+	logs.LogErr(err)
 }
 
 func GetName(w http.ResponseWriter, r *http.Request) {
