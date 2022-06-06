@@ -2,5 +2,5 @@ cn.exe
 .env
 cn
 
-./mongo
-./.data
+.data/minio
+mongo/data
