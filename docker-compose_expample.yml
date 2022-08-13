@@ -26,6 +26,8 @@ services:
 
   cn:
     image: ghcr.io/mertdogan12/cn:latest
+    security_opt:
+      - seccomp:unconfined
     restart: always
     env_file: .env
     ports:
